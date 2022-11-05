@@ -6,19 +6,19 @@
     [CmdletBinding(SupportsShouldProcess)]
     Param(
         [Parameter(Mandatory = $True,Position=0, HelpMessage="The plain text to encrypt")]
-        [string]$Cipher,
+        [string]$Text,
         [Parameter(Mandatory = $True,Position=1, HelpMessage="The password")] 
         [string]$Password
     )
-    Write-Verbose "CaesarDecrypt `"$Cipher`" `"$Password`""
-    . "$PSScriptRoot\CaesarDefinition.ps1"
-    if(-not 'Cryptography.Caesar' -as [Type]){
-        Write-Verbose "Add-Type -TypeDefinition Ceasar"
-        Add-Type -TypeDefinition $Ceasar
+
+    Write-Verbose "AesEncrypt `"$Text`" `"$Password`""
+    . "$PSScriptRoot\AES-Type.ps1"
+    if(-not 'Cryptography.AES' -as [Type]){
+        Write-Verbose "Add-Type -TypeDefinition AES"
+        Add-Type -TypeDefinition $AesType
     }
 
-    $Result = [Cryptography.Caesar]::Decrypt($Cipher,$Password)
+    $Result = [Cryptography.AES]::Encrypt($Text,$Password)
     $Result
-
 
 

@@ -14,5 +14,13 @@
   {
     "Cipher": "DES_Decrypt",
     "File": "DES_Decrypt.ps1"
+  },
+  {
+    "Cipher": "AES_Encrypt",
+    "File": "AesEncrypt.ps1"
+  },
+  {
+    "Cipher": "AES_Decrypt",
+    "File": "AesDecrypt.ps1"
   }
 ]
