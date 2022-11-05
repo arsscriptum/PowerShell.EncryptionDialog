@@ -1,11 +1,11 @@
 [
   {
-    "Cipher": "Ceasar Encrypt",
-    "File": "CeasarEncrypt.ps1"
+    "Cipher": "Caesar Encrypt",
+    "File": "CaesarEncrypt.ps1"
   },
   {
-    "Cipher": "Ceasar Decrypt",
-    "File": "CeasarDecrypt.ps1"
+    "Cipher": "Caesar Decrypt",
+    "File": "CaesarDecrypt.ps1"
   },
   {
     "Cipher": "DES_Encrypt",

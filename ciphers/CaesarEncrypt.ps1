@@ -3,21 +3,22 @@
 #̷𝓍   🇵​​​​​🇴​​​​​🇼​​​​​🇪​​​​​🇷​​​​​🇸​​​​​🇭​​​​​🇪​​​​​🇱​​​​​🇱​​​​​ 🇸​​​​​🇨​​​​​🇷​​​​​🇮​​​​​🇵​​​​​🇹​​​​​ 🇧​​​​​🇾​​​​​ 🇬​​​​​🇺​​​​​🇮​​​​​🇱​​​​​🇱​​​​​🇦​​​​​🇺​​​​​🇲​​​​​🇪​​​​​🇵​​​​​🇱​​​​​🇦​​​​​🇳​​​​​🇹​​​​​🇪​​​​​.🇶​​​​​🇨​​​​​@🇬​​​​​🇲​​​​​🇦​​​​​🇮​​​​​🇱​​​​​.🇨​​​​​🇴​​​​​🇲​​​​​
 #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     Param(
-        [Parameter(Mandatory = $true,Position=0, HelpMessage="The cipher text")]
-        [string]$datastr,
+        [Parameter(Mandatory = $True,Position=0, HelpMessage="The plain text to encrypt")]
+        [string]$Text,
         [Parameter(Mandatory = $false,Position=1, HelpMessage="The password")] 
-        [string]$passwd="secret"
+        [string]$Password="secret"
     )
-    $Result = ''
-    $datastr = $datastr.Trim()
-    try{
-        $Decrypt = $datastr | ConvertTo-SecureString
-        $Result = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($Decrypt))
-    }catch{
-        $Result = "<ERROR OCCURED>"
-        Write-Error $_
+
+    Write-Verbose "CaesarEncrypt `"$Text`" `"$Password`""
+    . "$PSScriptRoot\CaesarDefinition.ps1"
+    if(-not 'Caesar' -as [Type]){
+        Write-Verbose "Add-Type -TypeDefinition Ceasar"
+        Add-Type -TypeDefinition $Caesar
     }
+
+    $Result = [Caesar]::Encrypt($Text,$Password)
     $Result
+
 

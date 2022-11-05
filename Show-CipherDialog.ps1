@@ -1,4 +1,7 @@
-
+<#
+#̷𝓍   𝓐𝓡𝓢 𝓢𝓒𝓡𝓘𝓟𝓣𝓤𝓜
+#̷𝓍   🇵​​​​​🇴​​​​​🇼​​​​​🇪​​​​​🇷​​​​​🇸​​​​​🇭​​​​​🇪​​​​​🇱​​​​​🇱​​​​​ 🇸​​​​​🇨​​​​​🇷​​​​​🇮​​​​​🇵​​​​​🇹​​​​​ 🇧​​​​​🇾​​​​​ 🇬​​​​​🇺​​​​​🇮​​​​​🇱​​​​​🇱​​​​​🇦​​​​​🇺​​​​​🇲​​​​​🇪​​​​​🇵​​​​​🇱​​​​​🇦​​​​​🇳​​​​​🇹​​​​​🇪​​​​​.🇶​​​​​🇨​​​​​@🇬​​​​​🇲​​​​​🇦​​​​​🇮​​​​​🇱​​​​​.🇨​​​​​🇴​​​​​🇲​​​​​
+#>
 
 
 [CmdletBinding(SupportsShouldProcess)]
@@ -160,16 +163,14 @@ Function Initialize-CiphersCombobox{
         $o = $list[$Algo.SelectedIndex]
         $Filename = $o.File
         $CipherFilePath = "$PSScriptRoot\ciphers\$Filename"
-        [string[]]$plainText = $Script:InputText.Text.Split([Environment]::NewLine, [StringSplitOptions]::RemoveEmptyEntries)
+        [string]$plainText = $Script:InputText.Text
         $OutputStream.Text = ""
-        ForEach($str in $plainText){
-            Write-Host "`"$CipherFilePath`" $str $passwd"
-            $processedMsg = . "$CipherFilePath" "$str" "$passwd"
-            Write-Host "`"$processedMsg`" "
-           Out-Message "$processedMsg" -n
-        }
-        
        
+        Write-Host "`"$CipherFilePath`" $plainText $passwd"
+        $processedMsg = . "$CipherFilePath" "$plainText" "$passwd"
+        Write-Host "`"$processedMsg`" "
+        Out-Message "$processedMsg" -n
+
     })
 
     [void]$Form.ShowDialog() 
