@@ -52,18 +52,6 @@ function Get-CiphersList{
     $cipher_list
 }
 
-Add-Type -TypeDefinition @"
-   public enum LogTypes
-   {
-      LogError,
-      LogSuccess,
-      LogHighlight,
-      LogNormal,
-      LogTitle
-   }
-"@
-
-
 
 
 
