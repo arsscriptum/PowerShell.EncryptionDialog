@@ -22,6 +22,26 @@ function Get-ImgPath{
     return $imgpath
 }
 
+function Get-CiphersPath{ 
+    [CmdletBinding(SupportsShouldProcess)]
+    Param ()  
+    $ScriptPath = $PSScriptRoot
+    $cipherspath = Join-Path $ScriptPath 'ciphers'
+    return $cipherspath
+}
+
+$ciphers = Get-CiphersPath
+
+$caesar = Join-Path $ciphers 'CaesarDefinition.ps1'
+$aes = Join-Path $ciphers 'AES-Type.ps1'
+
+. "$aes"
+. "$caesar"
+
+Add-Type -TypeDefinition $Caesar -PassThru
+
+Add-Type -TypeDefinition $AesType -PassThru
+
 
 function Get-CiphersList{ 
     [CmdletBinding(SupportsShouldProcess)]
